@@ -1,4 +1,4 @@
-# Project 1: Linux Kernel Modules
+## Project 1: Linux Kernel Modules
 
 - I. Kernel modules overview
 - II. Loading and removing kernel modules
@@ -15,3 +15,13 @@
           module was first loaded.
         - Be sure to remove `/proc/seconds` when the module is
           removed.
+
+## Project 2: Linux Kernel Module for Task
+
+- Information  
+  In this project, you will write a kernel module that uses `/proc` file system for displaying a task’s information in a
+  Linux system.
+- Be sure to review the programming project in Chap.2 before you begin this project
+- It can be completed using the Linux virtual machine provided with the textbook 
+- Part I – Writing to the `/proc` file system 
+- Part II – Reading from the `/proc` file system
