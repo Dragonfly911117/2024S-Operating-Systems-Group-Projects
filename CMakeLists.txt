@@ -18,3 +18,5 @@ set(MERGE_SORT_FILES
 )
 
 add_executable(merge_sort ${MERGE_SORT_FILES})
+
+add_executable(processes_scheduler src/ProcessScheduler.c)
