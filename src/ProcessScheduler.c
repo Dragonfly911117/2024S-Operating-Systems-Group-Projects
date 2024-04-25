@@ -13,7 +13,6 @@ typedef struct {
 
 void FCFS(Process processes[], int n) {
     printf("--------------FCFS Scheduling--------------\n");
-
     int current_time = 0;
     int total_waiting_time = 0;
     int total_turnaround_time = 0;
@@ -34,11 +33,9 @@ void FCFS(Process processes[], int n) {
 
 void SJF(Process processes[], int n) {
     printf("--------------SJF Scheduling--------------\n");
-
     int current_time = 0;
     int completed = 0;
     int completed_time[n];
-    int first_arrival_time[n];
     for (int i = 0; i < n; i++) {
         processes[i].remaining_time = processes[i].burst_time;
     }
@@ -56,9 +53,6 @@ void SJF(Process processes[], int n) {
         if (shortest_task_index == -1) {
             current_time++;
         } else {
-            if (processes[shortest_task_index].remaining_time == processes[shortest_task_index].burst_time) {
-                first_arrival_time[shortest_task_index] = current_time;
-            }
             processes[shortest_task_index].remaining_time--;
             current_time++;
             if (processes[shortest_task_index].remaining_time == 0) {
@@ -68,14 +62,14 @@ void SJF(Process processes[], int n) {
             }
         }
     }
-
+    // printing results
     int waiting_time[n];
     int turnaround_time[n];
     int total_waiting_time = 0;
     int total_turnaround_time = 0;
     for (int i = 0; i < n; i++) {
         waiting_time[i] = completed_time[i] - processes[i].arrival_time - processes[i].burst_time;
-        turnaround_time[i] = completed_time[i] - first_arrival_time[i];
+        turnaround_time[i] = completed_time[i] - processes[i].arrival_time;
         total_waiting_time += waiting_time[i];
         total_turnaround_time += turnaround_time[i];
     }
@@ -91,11 +85,9 @@ void SJF(Process processes[], int n) {
 
 void PriorityBased(Process processes[], int n) {
     printf("--------------Priority Based--------------\n");
-
     int current_time = 0;
     int completed = 0;
     int completed_time[n];
-    int first_arrival_time[n];
     for (int i = 0; i < n; i++) {
         processes[i].remaining_time = processes[i].burst_time;
     }
@@ -113,9 +105,6 @@ void PriorityBased(Process processes[], int n) {
         if (current_task_index == -1) {
             current_time++;
         } else {
-            if (processes[current_task_index].remaining_time == processes[current_task_index].burst_time) {
-                first_arrival_time[current_task_index] = current_time;
-            }
             processes[current_task_index].remaining_time--;
             current_time++;
             if (processes[current_task_index].remaining_time == 0) {
@@ -125,14 +114,14 @@ void PriorityBased(Process processes[], int n) {
             }
         }
     }
-
+    // printing results
     int waiting_time[n];
     int turnaround_time[n];
     int total_waiting_time = 0;
     int total_turnaround_time = 0;
     for (int i = 0; i < n; i++) {
         waiting_time[i] = completed_time[i] - processes[i].arrival_time - processes[i].burst_time;
-        turnaround_time[i] = completed_time[i] - first_arrival_time[i];
+        turnaround_time[i] = completed_time[i] - processes[i].arrival_time;
         total_waiting_time += waiting_time[i];
         total_turnaround_time += turnaround_time[i];
     }
@@ -154,7 +143,6 @@ void RoundRobin(Process processes[], int n, int quantum) {
     int is_idle = 1;
     int q = 0;
     int completed_time[n];
-    int first_arrival_time[n];
     for (int i = 0; i < n; i++) {
         processes[i].remaining_time = processes[i].burst_time;
     }
@@ -178,9 +166,6 @@ void RoundRobin(Process processes[], int n, int quantum) {
         if (is_idle) {
             current_time++;
         } else {
-            if (processes[current_id].remaining_time == processes[current_id].burst_time) {
-                first_arrival_time[current_id] = current_time;
-            }
             processes[current_id].remaining_time--;
             current_time++;
             q++;
@@ -193,14 +178,14 @@ void RoundRobin(Process processes[], int n, int quantum) {
             }
         }
     }
-
+    // printing results
     int waiting_time[n];
     int turnaround_time[n];
     int total_waiting_time = 0;
     int total_turnaround_time = 0;
     for (int i = 0; i < n; i++) {
         waiting_time[i] = completed_time[i] - processes[i].arrival_time - processes[i].burst_time;
-        turnaround_time[i] = completed_time[i] - first_arrival_time[i];
+        turnaround_time[i] = completed_time[i] - processes[i].arrival_time;
         total_waiting_time += waiting_time[i];
         total_turnaround_time += turnaround_time[i];
     }
@@ -216,11 +201,9 @@ void RoundRobin(Process processes[], int n, int quantum) {
 
 void RoundRobinPriority(Process processes[], int n, int quantum_time) {
     printf("--------------Priority With Round Robin--------------\n");
-
     int current_time = 0;
     int completed = 0;
     int completed_time[n];
-    int first_arrival_time[n];
     for (int i = 0; i < n; i++) {
         processes[i].remaining_time = processes[i].burst_time;
     }
@@ -262,9 +245,6 @@ void RoundRobinPriority(Process processes[], int n, int quantum_time) {
         if (current_task_index == -1) {
             current_time++;
         } else {
-            if (processes[current_task_index].remaining_time == processes[current_task_index].burst_time) {
-                first_arrival_time[current_task_index] = current_time;
-            }
             current_time++;
             processes[current_task_index].remaining_time--;
             q++;
@@ -278,14 +258,14 @@ void RoundRobinPriority(Process processes[], int n, int quantum_time) {
             }
         }
     }
-
+    // printing results
     int waiting_time[n];
     int turnaround_time[n];
     int total_waiting_time = 0;
     int total_turnaround_time = 0;
     for (int i = 0; i < n; i++) {
         waiting_time[i] = completed_time[i] - processes[i].arrival_time - processes[i].burst_time;
-        turnaround_time[i] = completed_time[i] - first_arrival_time[i];
+        turnaround_time[i] = completed_time[i] - processes[i].arrival_time;
         total_waiting_time += waiting_time[i];
         total_turnaround_time += turnaround_time[i];
     }
