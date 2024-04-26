@@ -101,6 +101,7 @@ int main() {
 
     printf("\nSorted Linked List is: \n");
     printList(a);
+    printf("\n");
 
     return 0;
 }
