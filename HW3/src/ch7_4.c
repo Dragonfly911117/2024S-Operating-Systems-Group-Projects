@@ -7,9 +7,9 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    int sleep_time = atoi(argv[1]);
-    int num_producers = atoi(argv[2]);
-    int num_consumers = atoi(argv[3]);
+    int sleep_time = strtol(argv[1], NULL, 10);
+    int num_producers = strtol(argv[2], NULL, 10);
+    int num_consumers = strtol(argv[3], NULL, 10);
 
     pthread_t producers[num_producers];
     pthread_t consumers[num_consumers];
@@ -28,7 +28,8 @@ int main(int argc, char* argv[]) {
     for (int i = 0; i < num_consumers; i++)
         pthread_create(&consumers[i], NULL, consumer, NULL);
 
-    pthread_create(NULL, NULL, statusCheck, NULL);
+    pthread_t status_checker;
+    pthread_create(&status_checker, NULL, statusCheck, NULL);
 
     sleep(sleep_time);
 
@@ -79,7 +80,7 @@ void print_info() {
     printf("%s", output);
 }
 
-_Noreturn void* statusCheck(void*) {
+void* statusCheck(void*) {
     while (1) {
         print_info();
         sleep(STATUS_CHECK_INTERVAL);

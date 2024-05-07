@@ -6,6 +6,10 @@
 #include <semaphore.h>
 #include <unistd.h> // for sleep
 #include <stdlib.h>
+#include <string.h>
+#include <stddef.h>
+#include <errno.h>
+
 
 #define BUFFER_SIZE 5
 #define STATUS_CHECK_INTERVAL 3
@@ -32,4 +36,4 @@ void* producer(void*);
 
 void* consumer(void*);
 
-#endif; //HW3_CH7_4_H
+#endif //HW3_CH7_4_H
